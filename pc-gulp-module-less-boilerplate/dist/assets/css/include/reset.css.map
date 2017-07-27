@@ -1,0 +1,1 @@
+{"version":3,"sources":["reset.css"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,mBAAmB;CACpB","file":"reset.css","sourcesContent":["h1 {\n  margin-top: 100px;\n  transition: all 1s;\n}\n"]}

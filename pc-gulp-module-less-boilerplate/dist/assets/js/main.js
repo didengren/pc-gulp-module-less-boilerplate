@@ -1,0 +1,2 @@
+!function(e){function o(n){if(r[n])return r[n].exports;var t=r[n]={exports:{},id:n,loaded:!1};return e[n].call(t.exports,t,t.exports,o),t.loaded=!0,t.exports}var r={};return o.m=e,o.c=r,o.p="",o(0)}([function(e,o,r){"use strict";var n=r(1),t=function(){var e="";return e=n.name+n.desc};console.log(t()),console.log("hello World!"),console.log("_(:з」∠)_")},function(e,o){"use strict";Object.defineProperty(o,"__esModule",{value:!0});o.name="Sam Xu",o.desc=" is a boy"}]);
+//# sourceMappingURL=main.js.map
