@@ -32,16 +32,16 @@ gulp.task('default', ['dev']);
 // 		'./dist/compenents/**/*.{html,js,css}'
 // 	], ['browser-reload']);
 // });
-gulp.task('dev', ['css', 'lessDev', 'html', 'babelDev', 'imgDev', 'libDev',
+gulp.task('dev', ['css', 'lessDev', 'html', 'babelDev', 'imgDev', 'libDev', 'includeDev',
 	'browser-start'], function() {
 	console.log("正在努力开启开发模式_(:з)∠)_");
 	gulp.watch('./src/assets/images/*', ['imgDev']);
 	gulp.watch('./src/assets/css/**/*.css', ['css']);
 	gulp.watch('./src/assets/css/**/*.less', ['lessDev']);
 	gulp.watch('./src/views/**/*.html', ['html']);
-	gulp.watch('./src/assets/js/*.js', ['babelDev']);
+	gulp.watch('./src/assets/js/**/*.js', ['babelDev', 'libDev', 'includeDev']);
 	//监控build文件下的变化
-	gulp.watch(['./dist/views/**/*.html', './dist/assets/js/*.js', './dist/assets/css/*.css'], ['browser-reload']);
+	gulp.watch(['./dist/views/**/*.html', './dist/assets/js/**/*.js', './dist/assets/css/*.css'], ['browser-reload']);
 });
 
 // 编译Less
@@ -102,6 +102,13 @@ gulp.task('libDev', function() {
 		.pipe(gulp.dest('./dist/assets/js/lib/'));
 });
 
+// 复制公共js
+gulp.task('includeDev', function() {
+	console.log('第三方Lib也在努力复制_(:з)∠)_');
+	return gulp.src('./src/assets/js/include/**')
+		.pipe(gulp.dest('./dist/assets/js/include/'));
+});
+
 /**********************************************************
 	搭建静态服务器
 **********************************************************/
@@ -111,7 +118,7 @@ gulp.task('browser-start', function() {
 		files: ['views/**/*.html'],
 		server: {
 			baseDir: "./dist/",
-			index: "views/demo.html",
+			index: "views/index.html",
 			online: true
 		}
 	});
@@ -136,7 +143,7 @@ gulp.task('browser-reload', function() {
 gulp.task('publish', function(cb) {
 	console.log('_(:з」∠)_正在努力为你生产最终代码_(:з」∠)_');
 	runSequence('clean', 'imgMinPublish',
-		'html', 'libPublish', 'babelPublish', 'css', 'lessPublish', cb);
+		'html', 'libPublish', 'includePublish', 'babelPublish', 'css', 'lessPublish', cb);
 });
 
 //清空文件夹
@@ -174,6 +181,13 @@ gulp.task('libPublish', function() {
 	console.log('第三方Lib也在努力复制_(:з)∠)_');
 	return gulp.src('./src/assets/js/lib/**')
 		.pipe(gulp.dest('./dist/assets/js/lib/'));
+});
+
+// 发布公共js
+gulp.task('includePublish', function() {
+	console.log('第三方Lib也在努力复制_(:з)∠)_');
+	return gulp.src('./src/assets/js/include/**')
+		.pipe(gulp.dest('./dist/assets/js/include/'));
 });
 
 // 生产ES6
